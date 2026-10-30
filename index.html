@@ -357,6 +357,25 @@ h1 { color:#d9ffe3; text-shadow:0 0 12px rgba(74,222,128,.32); letter-spacing:cl
   flex-wrap: wrap;
   margin-bottom: 16px;
 }
+.explanation-box {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(18, 40, 26, .85);
+  border: 1px solid #2f4a38;
+  color: #c7d4ca;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.explanation-box strong {
+  display: block;
+  color: #a8efba;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
 
 </style>
 </head>
@@ -367,15 +386,42 @@ h1 { color:#d9ffe3; text-shadow:0 0 12px rgba(74,222,128,.32); letter-spacing:cl
     <section id="home">
         <header>
             <h1>LEX UP</h1>
-            <div class="subtitle">ESCOLHA A MATÉRIA</div>
+            <div class="subtitle">ESCOLHA O MODO DE ESTUDO</div>
         </header>
+        <div class="menu-title">MODO</div>
+        <div class="menu" id="modeMenu">
+            <button class="content-btn subject-btn" id="btnQuestoes" type="button">
+                <span>QUESTÕES<span class="arrow">→</span></span>
+                <small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">Quiz por disciplina e blocos temáticos</small>
+            </button>
+            <button class="content-btn subject-btn" id="btnFlashcards" type="button">
+                <span>FLASHCARDS<span class="arrow">→</span></span>
+                <small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">Revisão ativa por disciplina</small>
+            </button>
+        </div>
+    </section>
+
+    <section id="subjectMenuQuestoes" class="hidden">
+        <div class="topbar">
+            <button class="back" type="button" onclick="goHome()">← MODOS</button>
+            <div class="topic">QUESTÕES — DISCIPLINAS</div>
+        </div>
         <div class="menu-title">DISCIPLINAS</div>
-        <div class="menu" id="menu"></div>
+        <div class="menu" id="menuQuestoes"></div>
+    </section>
+
+    <section id="subjectMenuFlash" class="hidden">
+        <div class="topbar">
+            <button class="back" type="button" onclick="goHome()">← MODOS</button>
+            <div class="topic">FLASHCARDS — DISCIPLINAS</div>
+        </div>
+        <div class="menu-title">DISCIPLINAS</div>
+        <div class="menu" id="menuFlash"></div>
     </section>
 
     <section id="subjectMenu" class="hidden">
         <div class="topbar">
-            <button class="back" onclick="goHome()">← MATÉRIAS</button>
+            <button class="back" type="button" onclick="goQuestoesMenu()">← DISCIPLINAS</button>
             <div class="topic" id="subjectTitle"></div>
         </div>
         <div class="menu-title">BLOCOS DE QUESTÕES</div>
@@ -1765,7 +1811,7 @@ let currentAnswer = -1;
 
 const constitucionalContents = [{"name":"A — TEORIA GERAL DOS DIREITOS FUNDAMENTAIS","summary":"<p><b>Direitos humanos × direitos fundamentais:</b> a distinção é principalmente de plano normativo: os primeiros são reconhecidos no âmbito internacional; os segundos, no ordenamento constitucional interno. <b>Direitos</b> são bens e posições jurídicas; <b>garantias</b> são instrumentos de proteção (habeas corpus, mandado de segurança, mandado de injunção, habeas data).</p><p><b>Abertura material e cláusulas pétreas:</b> o art. 5º, §2º admite direitos decorrentes do regime, dos princípios e dos tratados. Tratados pelo rito do §3º equivalem a emenda; os demais têm status supralegal (RE 466.343). O art. 60, §4º, IV protege direitos e garantias individuais contra propostas tendentes a aboli-los.</p><p><b>Dimensões:</b> 1ª — liberdades (abstenção estatal); 2ª — direitos sociais (prestações positivas); 3ª — fraternidade/solidariedade (difusos e coletivos); 4ª/5ª — biotecnologia, informação, paz (doutrina). Características: historicidade, universalidade, relatividade, concorrência, inalienabilidade, imprescritibilidade e vinculação dos três Poderes.</p><p><b>Dimensões objetiva/subjetiva e eficácia:</b> subjetiva = pretensão do titular; objetiva = valores que irradiam e geram deveres de proteção. Eficácia vertical (Estado×indivíduo), horizontal (particular×particular) e, para parte da doutrina, diagonal (relação assimétrica). Teoria de Jellinek: status passivo, negativo, positivo e ativo.</p><p><b>Funções e limites:</b> função de defesa, de prestação, de prestação perante terceiros e de não discriminação. Limitações internas (inerentes ao conteúdo) e externas. Teoria dos limites dos limites: autorização constitucional, núcleo essencial, proporcionalidade (adequação, necessidade, proporcionalidade em sentido estrito) e normas claras/genéricas.</p>","questions":[{"q":"Direitos humanos e direitos fundamentais diferenciam-se, principalmente, porque","options":["direitos humanos pertencem ao plano internacional, enquanto direitos fundamentais são reconhecidos no plano constitucional interno.","são expressões sempre idênticas, sem diferença de plano normativo.","direitos fundamentais só existem em decisões judiciais.","direitos humanos só se aplicam a estrangeiros."],"answer":0,"explanation":"A distinção é de plano normativo: direitos humanos no Direito Internacional; direitos fundamentais no ordenamento constitucional interno."},{"q":"Segundo a clássica distinção atribuída a Rui Barbosa, garantias fundamentais são","options":["os bens e posições jurídicas assegurados à pessoa.","instrumentos processuais e institucionais de proteção dos direitos (ex.: habeas corpus, mandado de segurança).","sinônimos perfeitos de direitos fundamentais.","apenas normas penais."],"answer":1,"explanation":"Direitos são o 'quê' (bens jurídicos); garantias são o 'como' (instrumentos de tutela)."},{"q":"O art. 5º, §2º, da CF consagra a cláusula de abertura, que permite","options":["direitos fundamentais decorrentes dos princípios adotados pela Constituição e dos tratados internacionais de direitos humanos.","apenas os direitos expressamente listados no art. 5º.","somente direitos criados por lei ordinária.","a extinção de direitos por decreto."],"answer":0,"explanation":"O catálogo de direitos fundamentais é aberto (não tipicidade/exaustividade)."},{"q":"Tratados de direitos humanos aprovados pelo rito do art. 5º, §3º (dois turnos, 3/5 em cada Casa)","options":["têm equivalência de emenda constitucional.","têm status meramente legal.","não integram o ordenamento brasileiro.","possuem apenas valor interpretativo."],"answer":0,"explanation":"Exemplos: Convenção sobre Direitos das Pessoas com Deficiência e Tratado de Marraqueche."},{"q":"Segundo o STF (RE 466.343), tratados de direitos humanos não aprovados pelo rito qualificado possuem","options":["status constitucional.","status supralegal (acima da lei, abaixo da Constituição).","status infraconstitucional ordinário.","nenhuma eficácia no Brasil."],"answer":1,"explanation":"O STF firmou o status supralegal para tratados de direitos humanos aprovados pelo rito ordinário."},{"q":"Os direitos e garantias individuais são cláusulas pétreas com base no","options":["art. 60, §4º, IV, da CF.","art. 5º, §1º, apenas.","art. 1º da CF.","art. 37 da CF."],"answer":0,"explanation":"O poder constituinte derivado não pode deliberar sobre proposta tendente a abolir os direitos e garantias individuais."},{"q":"A 1ª dimensão dos direitos fundamentais caracteriza-se por","options":["exigir prestações positivas do Estado.","impor ao Estado dever de abstenção (liberdades negativas/civis e políticas).","proteger apenas direitos difusos.","tratar exclusivamente de biotecnologia."],"answer":1,"explanation":"Exemplos: liberdade de expressão, de locomoção, de reunião. Surgiram com as revoluções liberais."},{"q":"A 2ª dimensão dos direitos fundamentais exige","options":["apenas abstenção estatal.","prestações positivas do Estado (direitos sociais, econômicos e culturais).","titularidade exclusivamente coletiva.","supressão dos direitos de 1ª dimensão."],"answer":1,"explanation":"Exemplos: educação, saúde, moradia, trabalho, previdência."},{"q":"A 3ª dimensão dos direitos fundamentais refere-se a","options":["direitos de fraternidade/solidariedade, de titularidade difusa ou coletiva.","apenas direitos políticos.","somente liberdades individuais.","direitos que substituem as gerações anteriores."],"answer":0,"explanation":"Exemplos: meio ambiente equilibrado, desenvolvimento, autodeterminação dos povos."},{"q":"A teoria das gerações/dimensões implica que","options":["as dimensões se acumulam historicamente e todas permanecem vigentes.","cada nova dimensão extingue a anterior.","só a 1ª dimensão tem eficácia.","as dimensões são mutuamente excludentes."],"answer":0,"explanation":"Não há substituição; há acumulação histórica."},{"q":"A historicidade dos direitos fundamentais significa que","options":["eles nascem, evoluem e se transformam ao longo do tempo.","são atemporais e imutáveis.","não sofrem influência do contexto social.","só existem no Direito Internacional."],"answer":0,"explanation":"A própria teoria das gerações expressa essa dimensão histórica."},{"q":"A relatividade (limitabilidade) dos direitos fundamentais indica que","options":["nenhum direito fundamental é absoluto; todos podem sofrer limitações mediante ponderação.","todos os direitos são absolutos.","só o direito à vida é relativo.","limites só podem ser impostos por decreto."],"answer":0,"explanation":"Colisões são resolvidas pela ponderação (proporcionalidade)."},{"q":"A concorrência (acumulabilidade) de direitos fundamentais ocorre quando","options":["um mesmo titular exerce vários direitos simultaneamente sobre o mesmo fato.","dois direitos entram em conflito.","o Estado revoga direitos.","há renúncia total de direitos."],"answer":0,"explanation":"Concorrência (somam-se) não se confunde com colisão (tensão que exige ponderação)."},{"q":"A inalienabilidade (indisponibilidade) dos direitos fundamentais significa que","options":["não podem ser vendidos, doados ou renunciados em definitivo.","podem ser comercializados livremente.","prescrevem em cinco anos.","só valem para brasileiros."],"answer":0,"explanation":"Admite-se apenas restrição voluntária pontual e temporária."},{"q":"A imprescritibilidade dos direitos fundamentais significa que","options":["o direito em si não se extingue pelo decurso do tempo; o que pode prescrever é a pretensão reparatória.","todo direito fundamental prescreve em dois anos.","a pretensão reparatória nunca prescreve.","só direitos patrimoniais são imprescritíveis."],"answer":0,"explanation":"O não exercício, por si só, não extingue o direito fundamental."},{"q":"A dimensão subjetiva dos direitos fundamentais corresponde","options":["à pretensão que o titular pode exercer perante o Estado ou particulares.","apenas a valores abstratos sem titular.","exclusivamente a deveres do Estado.","à ausência de eficácia."],"answer":0,"explanation":"É o aspecto de faculdade individual: poder de exigir, resistir ou demandar."},{"q":"A dimensão objetiva dos direitos fundamentais significa que","options":["são valores que estruturam a ordem jurídica, irradiam efeitos e geram deveres de proteção ao Estado.","só existem quando o titular ajuíza ação.","não vinculam os Poderes.","são apenas regras de organização administrativa."],"answer":0,"explanation":"Irradiam por todo o sistema (interpretação, políticas públicas, dever de proteção)."},{"q":"A eficácia vertical dos direitos fundamentais descreve a relação","options":["entre Estado e indivíduo.","exclusivamente entre particulares.","entre países.","entre órgãos privados sem direitos."],"answer":0,"explanation":"É a incidência clássica na relação poder público × indivíduo."},{"q":"A eficácia horizontal dos direitos fundamentais refere-se à sua incidência","options":["nas relações entre particulares.","somente contra o Poder Executivo.","apenas em tratados internacionais.","exclusivamente em relações processuais."],"answer":0,"explanation":"Reconhecida pelo STF, por exemplo, no RE 201.819 (caso UBC)."},{"q":"No status passivo de Jellinek, o indivíduo","options":["encontra-se sujeito a deveres e obrigações impostos pela ordem jurídica.","exige prestações positivas do Estado.","participa da formação da vontade estatal.","possui esfera de liberdade absoluta."],"answer":0,"explanation":"Status subjectionis: sujeição ao poder estatal (ex.: pagar tributos)."},{"q":"O status negativo (libertatis) de Jellinek corresponde","options":["à esfera de liberdade em que o Estado deve se abster de interferir.","à exigência de prestações materiais.","ao exercício de direitos políticos.","à sujeição a deveres tributários."],"answer":0,"explanation":"Exemplos: liberdade de consciência, expressão, locomoção."},{"q":"O status positivo (civitatis) de Jellinek permite ao indivíduo","options":["exigir prestações e atuações positivas do Estado.","apenas se abster de agir.","participar só como eleitor.","afastar todas as leis."],"answer":0,"explanation":"Exemplos: direito à saúde, educação, assistência social."},{"q":"O status ativo (activae civitatis) de Jellinek relaciona-se","options":["à participação na formação da vontade estatal (votar, ser votado, ação popular).","à sujeição passiva a deveres.","somente ao direito à intimidade.","à proibição de participação política."],"answer":0,"explanation":"É a dimensão dos direitos políticos e de participação democrática."},{"q":"A função de defesa dos direitos fundamentais consiste em","options":["atuar como barreiras contra intervenções estatais indevidas (direitos de resistência).","exigir apenas prestações materiais.","substituir o princípio da igualdade.","criar crimes."],"answer":0,"explanation":"Típica da 1ª dimensão (ex.: inviolabilidade do domicílio)."},{"q":"A função de prestação dos direitos fundamentais impõe ao Estado","options":["deveres de ação positiva para concretizar condições mínimas de dignidade.","apenas abstenção.","a criação de novos crimes.","a extinção de direitos sociais."],"answer":0,"explanation":"Típica da 2ª dimensão (hospitais, escolas, políticas públicas)."},{"q":"A teoria dos limites dos limites exige, entre outros aspectos, que restrições a direitos fundamentais","options":["tenham respaldo constitucional, preservem o núcleo essencial e observem a proporcionalidade.","sejam sempre ilimitadas quando previstas em lei.","eliminem o conteúdo essencial do direito.","dispensem justificativa e clareza."],"answer":0,"explanation":"Também exige normas claras, genéricas e vedação de restrições casuísticas."},{"q":"No teste da proporcionalidade, a adequação examina se","options":["o meio escolhido é apto a alcançar o fim pretendido.","não existe alternativa menos restritiva.","o benefício sempre supera qualquer prejuízo.","a medida foi aprovada por unanimidade."],"answer":0,"explanation":"Adequação = aptidão do meio; necessidade e proporcionalidade em sentido estrito são etapas distintas."},{"q":"No teste da proporcionalidade, a necessidade verifica se","options":["existe alternativa menos restritiva e igualmente eficaz.","o meio é o mais popular.","o direito fundamental pode ser abolido.","a medida está dispensada de finalidade."],"answer":0,"explanation":"Busca-se o meio menos gravoso com eficácia equivalente."},{"q":"O núcleo essencial de um direito fundamental corresponde","options":["ao conteúdo mínimo indispensável que não pode ser esvaziado pela restrição.","à parte do direito que o legislador pode sempre eliminar.","à totalidade das normas infraconstitucionais.","a um conceito sem relevância."],"answer":0,"explanation":"Atingir o núcleo essencial equivale a esvaziar o direito, o que é vedado."},{"q":"Limitações internas dos direitos fundamentais são aquelas","options":["inerentes ao próprio conteúdo normativo do direito (ex.: liberdade de expressão não protege discurso de ódio).","impostas apenas por lei infraconstitucional.","sempre inconstitucionais.","aplicáveis somente a direitos sociais."],"answer":0,"explanation":"Decorrem da própria conformação do direito no texto constitucional."},{"q":"Limitações externas dos direitos fundamentais resultam de","options":["normas infraconstitucionais ou da colisão com outros direitos fundamentais.","apenas do próprio conteúdo do direito.","decisões administrativas sem lei.","costume internacional exclusivo."],"answer":0,"explanation":"Exigem maior escrutínio de proporcionalidade."}]},{"name":"B — DIREITO À VIDA E TEMAS BIOÉTICOS","summary":"<p><b>Direito à vida:</b> dimensão negativa (não ser privado da vida) e positiva (vida digna). Não é absoluto; admite ponderação. Art. 5º, caput, CF.</p><p><b>Casos destacados:</b> ADI 3510 (células-tronco — marco da atividade cerebral); ADPF 54 (anencefalia — interrupção não configura aborto); art. 128, I, CP (gravidez decorrente de estupro); gêmeos siameses (análise concreta, sem autorização automática); HC 124.306 (1ª Turma — interpretação conforme para aborto voluntário no 1º trimestre — não vinculante erga omnes).</p><p><b>Fim de vida:</b> distanásia = prolongamento artificial sem perspectiva de cura; ortotanásia = não emprego de meios extraordinários (omissão; Resolução CFM 1.805/2006); eutanásia = ação intencional de provocar a morte (homicídio); suicídio assistido = terceiro fornece meios, paciente pratica o ato final (art. 122, CP).</p><p><b>Testemunhas de Jeová:</b> adulto capaz — prevalece autonomia e liberdade religiosa; menores/incapazes — prevalece proteção da vida.</p>","questions":[{"q":"O direito à vida, conforme o material, possui dimensão","options":["negativa (não ser privado da vida) e positiva (ligada a uma vida digna).","exclusivamente negativa, sem deveres estatais.","exclusivamente patrimonial.","restrita à proteção contra homicídio."],"answer":0,"explanation":"Há proteção contra privação da vida e deveres positivos de proteção (saúde, segurança etc.)."},{"q":"Na ADI 3510, o STF julgou a constitucionalidade de","options":["pesquisas com células-tronco embrionárias previstas na Lei 11.105/2005.","restrições a tatuagens em concursos.","símbolos religiosos em prédios públicos.","horários de provas de vestibular."],"answer":0,"explanation":"O STF adotou a atividade do sistema nervoso central como marco relevante do início da vida."},{"q":"Segundo o material, na ADPF 54 o STF decidiu que a interrupção da gestação de feto anencéfalo","options":["não configura a conduta típica de aborto, nas condições reconhecidas pelo Tribunal.","depende sempre de autorização judicial prévia.","é automaticamente equiparada a homicídio.","é regulada exclusivamente por lei municipal."],"answer":0,"explanation":"Comprovada a anencefalia, a gestante pode optar pela interrupção sem autorização judicial prévia."},{"q":"A gravidez decorrente de estupro é hipótese em que","options":["o Código Penal prevê a possibilidade de aborto legal (art. 128, I), com consentimento da gestante.","há necessidade obrigatória de autorização do STF.","o aborto é sempre proibido sem exceção.","somente decisão do júri autoriza a interrupção."],"answer":0,"explanation":"Excludente de ilicitude prevista no art. 128, I, do CP."},{"q":"A gestação de gêmeos siameses","options":["não tem interrupção automaticamente autorizada; exige análise concreta dos riscos.","é sempre interrompível sem análise do caso concreto.","recebe automaticamente o mesmo tratamento da anencefalia.","não envolve qualquer ponderação constitucional."],"answer":0,"explanation":"Exige demonstração de risco à gestante ou risco letal inevitável para ao menos um dos neonatos."},{"q":"No HC 124.306 (1ª Turma), o STF conferiu interpretação conforme aos arts. 124-126 do CP para","options":["excluir do tipo penal a interrupção voluntária da gestação no primeiro trimestre.","criminalizar qualquer interrupção gestacional.","tornar o aborto crime hediondo.","exigir autorização judicial em todos os casos."],"answer":0,"explanation":"Decisão de Turma (não vinculante erga omnes). Fundamento: autonomia, dignidade e integridade da mulher."},{"q":"Distanásia é definida como","options":["prolongamento artificial da vida por meios extraordinários, mesmo sem perspectiva de cura.","ação intencional para provocar a morte do paciente.","auxílio prestado para que a própria pessoa encerre a vida.","não emprego de meios extraordinários para prolongar a vida."],"answer":0,"explanation":"Pode configurar tratamento desumano ou degradante (art. 5º, III, CF)."},{"q":"A distinção central entre ortotanásia e eutanásia é que","options":["ortotanásia envolve não empregar meios extraordinários (omissão); eutanásia envolve ação intencional de provocar a morte.","ambas significam exatamente a mesma conduta.","ortotanásia é sempre uma ação destinada a antecipar a morte.","eutanásia consiste apenas em recusar transfusão."],"answer":0,"explanation":"A diferença omissão × ação determina a tipicidade penal."},{"q":"O suicídio assistido diferencia-se da eutanásia porque","options":["o próprio paciente pratica o ato final, com auxílio de terceiro que fornece meios ou instruções.","não há participação de terceiro.","o médico necessariamente pratica a ação que causa diretamente a morte.","é uma forma de distanásia."],"answer":0,"explanation":"Tipificado no art. 122 do CP (induzimento, instigação ou auxílio ao suicídio)."},{"q":"A ortotanásia, segundo a Resolução CFM 1.805/2006,","options":["é autorizada sob condições de consentimento informado e terminalidade irreversível.","é tipificada como homicídio.","exige autorização judicial prévia em todos os casos.","é proibida em qualquer hipótese."],"answer":0,"explanation":"A Resolução é ato administrativo; a doutrina majoritária considera a ortotanásia fato atípico."},{"q":"Na discussão sobre transfusão de sangue e Testemunhas de Jeová, o material destaca que","options":["a autonomia de adulto capaz tende a ser protegida, enquanto situações envolvendo menores exigem consideração prioritária à proteção da vida.","a liberdade religiosa nunca pode ser considerada.","toda recusa é juridicamente inválida.","a decisão é idêntica para adultos capazes e crianças em qualquer hipótese."],"answer":0,"explanation":"Colisão entre direito à vida, autonomia e liberdade religiosa (art. 5º, VI)."},{"q":"A eutanásia, no ordenamento brasileiro, é tipificada como","options":["homicídio (art. 121 do CP).","fato atípico.","contravenção penal.","ilícito apenas civil."],"answer":0,"explanation":"Há debate doutrinário e comparatista sobre eventual descriminalização sob condições estritas."},{"q":"O direito à vida admite exceção expressa na própria Constituição no caso de","options":["pena de morte em caso de guerra declarada (art. 5º, XLVII, 'a').","qualquer crime hediondo.","decisão administrativa.","lei ordinária genérica."],"answer":0,"explanation":"Confirma que o direito à vida, embora basilar, não é absoluto no texto constitucional."}]},{"name":"C — LIBERDADE DE EXPRESSÃO, RELIGIÃO E DADOS PESSOAIS","summary":"<p><b>Liberdade de manifestação do pensamento:</b> art. 5º, IV e IX. Protege a exteriorização do pensamento; veda o anonimato; admite responsabilização por abusos (honra, imagem). Não é imunidade para discurso discriminatório ou prática criminosa. Dimensão negativa (impedir censura) e positiva (garantir espaços de fala).</p><p><b>Exemplos:</b> HC 82.424 (discurso de ódio/racismo); Marcha da Maconha (defesa de descriminalização ≠ apologia); proselitismo religioso; tatuagens em concursos; Tema 786 (direito ao esquecimento incompatível com a CF).</p><p><b>Liberdade religiosa e laicidade:</b> art. 5º, VI. Laicidade = neutralidade estatal + proteção da liberdade de crença e culto (não hostilidade à religião). Temas: ADI 5258 (Bíblias em escolas), Tema 1086 (símbolos religiosos em prédios públicos), pregação em vagões, ADI 3901 (provas em dias religiosos).</p><p><b>Proteção de dados:</b> art. 5º, LXXIX (EC 115/2022) — direito à proteção dos dados pessoais, inclusive nos meios digitais.</p>","questions":[{"q":"O exercício da liberdade de expressão","options":["não exclui a responsabilização por abusos, como danos materiais, morais ou à imagem.","impede qualquer responsabilização civil por dano à honra.","autoriza discurso discriminatório em qualquer circunstância.","exige autorização prévia do Estado para toda opinião."],"answer":0,"explanation":"Há responsabilização posterior por abusos, sem confundir com censura prévia generalizada."},{"q":"A liberdade de manifestação do pensamento (art. 5º, IV) é acompanhada pela vedação","options":["ao anonimato.","de qualquer crítica ao Estado.","de manifestação artística.","de toda opinião impopular."],"answer":0,"explanation":"O texto constitucional veda expressamente o anonimato."},{"q":"No caso do discurso de ódio contra judeus (HC 82.424), o STF","options":["manteve condenação por racismo, reconhecendo limites à liberdade de expressão.","afirmou que toda manifestação é imune ao Direito Penal.","proibiu toda publicação jornalística sobre religião.","decidiu que honra e dignidade não têm proteção constitucional."],"answer":0,"explanation":"A liberdade de expressão encontra limites diante de ideias discriminatórias e de ódio."},{"q":"A Marcha da Maconha foi considerada compatível com a liberdade de expressão porque","options":["a defesa pública da descriminalização não se confunde, por si só, com incitação ou apologia de crime.","descriminalizou automaticamente todas as drogas.","autorizou a prática de qualquer crime em manifestações.","a manifestação dispensa qualquer limite constitucional."],"answer":0,"explanation":"Distingue-se a proposta de mudança legislativa da apologia de fato criminoso."},{"q":"O proselitismo religioso é protegido porque","options":["pode estar abrangido pela liberdade de manifestação do pensamento e pela liberdade religiosa.","exclui a liberdade religiosa de outras pessoas.","permite constranger fisicamente terceiros à conversão.","não se submete a nenhum limite jurídico."],"answer":0,"explanation":"A transmissão persuasiva de crenças é protegida, sem autorizar coerção."},{"q":"Quanto a tatuagens em concursos públicos, o material indica que","options":["restrições não podem ser arbitrárias; conteúdo que viole valores constitucionais pode ser relevante.","qualquer tatuagem impede a posse.","o edital pode proibir todas as tatuagens sem justificativa.","tatuagens são obrigatórias para cargos públicos."],"answer":0,"explanation":"O STF rejeita restrições genéricas a pessoas tatuadas."},{"q":"O princípio da laicidade estatal significa que","options":["o Estado não deve estabelecer preferência religiosa, sem deixar de proteger a liberdade religiosa.","o Estado deve adotar uma religião oficial.","somente religiões majoritárias têm proteção.","o Estado deve impedir toda manifestação religiosa em espaço privado."],"answer":0,"explanation":"Laicidade ≠ hostilidade à religião; exige neutralidade + proteção da liberdade de crença e culto."},{"q":"A ADI 5258 tratou da exigência legal de","options":["manutenção de exemplares da Bíblia em escolas e bibliotecas públicas estaduais, considerada contrária à laicidade.","proibição de todas as religiões em bibliotecas.","uso de tatuagens por servidores.","transfusão de sangue em hospitais privados."],"answer":0,"explanation":"A imposição de manter Bíblias distingue-se da mera possibilidade de disponibilização."},{"q":"Sobre símbolos religiosos em prédios públicos, o Tema 1086 admite sua presença quando","options":["o objetivo é manifestar a tradição cultural da sociedade brasileira, sem violar não discriminação, laicidade e impessoalidade.","o Estado declara oficialmente uma religião.","há obrigação de instalar símbolos de uma única religião em todos os órgãos.","não há qualquer finalidade cultural ou institucional."],"answer":0,"explanation":"A exposição com finalidade de manifestação da tradição cultural pode ser compatível com a CF."},{"q":"A proteção constitucional aos locais de culto, no exemplo de pregação em vagões de trem,","options":["não significa necessariamente que locais inadequados ao culto devam ser disponibilizados (ex.: vagões em funcionamento).","garante pregação em qualquer lugar, horário e circunstância.","afasta toda regra de uso dos espaços públicos.","proíbe qualquer manifestação religiosa fora de templos."],"answer":0,"explanation":"Distingue-se a proteção a locais adequados de culto da utilização de espaços inadequados."},{"q":"No tema de restrições de dias e horários para provas por motivos religiosos, há tensão entre","options":["liberdade religiosa e organização dos concursos/vestibulares.","direito de propriedade e extradição.","nacionalidade e direitos políticos exclusivamente.","separação de Poderes e estado de defesa."],"answer":0,"explanation":"ADI 3901 e a proteção da liberdade religiosa diante da disciplina de provas públicas."},{"q":"A proteção de dados pessoais, inclusive nos meios digitais, está expressamente prevista no","options":["art. 5º, LXXIX, incluído pela EC 115/2022.","art. 5º, IV, exclusivamente.","art. 60, §4º.","art. 37, XXI."],"answer":0,"explanation":"Direito fundamental expresso à proteção dos dados pessoais."},{"q":"Segundo o STF (Tema 786), o direito ao esquecimento","options":["é incompatível com a Constituição, pois colide com a liberdade de expressão e o direito à informação.","prevalece sempre sobre a liberdade de expressão.","é absoluto e irrestrito.","só se aplica a dados bancários."],"answer":0,"explanation":"RE 1.010.606 — o direito ao esquecimento não encontra respaldo na CF."},{"q":"A liberdade de expressão possui dimensão","options":["negativa (impedir censura) e positiva (garantir espaços de fala e pluralidade).","apenas negativa.","apenas positiva.","exclusivamente sancionatória."],"answer":0,"explanation":"Não se limita a impedir interferência; exige também condições para o exercício efetivo."}]}];
 
-const menu = document.getElementById("menu");
+const menu = document.getElementById("menuQuestoes"); // legacy alias
 const home = document.getElementById("home");
 const subjectMenu = document.getElementById("subjectMenu");
 const blockMenu = document.getElementById("blockMenu");
@@ -1786,23 +1832,57 @@ const subjects = [
     { name: "DIREITO PROCESSUAL CIVIL", description:"Questões de revisão processual civil", contents: processoCivilContents }
 ];
 
+const menuQuestoes = document.getElementById("menuQuestoes");
+const menuFlash = document.getElementById("menuFlash");
+const subjectMenuQuestoes = document.getElementById("subjectMenuQuestoes");
+const subjectMenuFlash = document.getElementById("subjectMenuFlash");
+const modeMenu = document.getElementById("modeMenu");
+
+// Map flashcard decks by subject name
+const flashBySubject = {
+    "DIREITO CONSTITUCIONAL": "constitucional"
+};
+
 subjects.forEach((subject) => {
     const button = document.createElement("button");
     button.className = "content-btn subject-btn";
-    button.innerHTML = `<span>${subject.name}<span class="arrow">→</span></span><small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">${subject.description}</small>`;
+    const qCount = (subject.contents || []).reduce((n, b) => n + (b.questions ? b.questions.length : 0), 0);
+    button.innerHTML = `<span>${subject.name}<span class="arrow">→</span></span><small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">${subject.description}${qCount ? " · " + qCount + " questões" : ""}</small>`;
     button.onclick = () => openSubject(subject);
-    menu.appendChild(button);
+    menuQuestoes.appendChild(button);
 });
 
+subjects.forEach((subject) => {
+    const key = flashBySubject[subject.name];
+    const deck = key ? flashcardDecks[key] : null;
+    const button = document.createElement("button");
+    button.className = "content-btn subject-btn";
+    if (deck && deck.cards && deck.cards.length) {
+        button.innerHTML = `<span>${subject.name}<span class="arrow">→</span></span><small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">${deck.cards.length} flashcards</small>`;
+        button.onclick = () => openFlashcards(key);
+    } else {
+        button.innerHTML = `<span>${subject.name}<span class="arrow">→</span></span><small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">Baralho em breve</small>`;
+        button.onclick = () => alert("Ainda não há flashcards cadastrados para esta disciplina.");
+    }
+    menuFlash.appendChild(button);
+});
 
-// Flashcards button on home
-(function() {
-    const fcBtn = document.createElement("button");
-    fcBtn.className = "content-btn subject-btn";
-    fcBtn.innerHTML = `<span>FLASHCARDS<span class="arrow">→</span></span><small style="display:block;margin-top:7px;color:#9fb4a4;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0">Direito Constitucional — ${flashcardDecks.constitucional.cards.length} cards</small>`;
-    fcBtn.onclick = () => openFlashcards("constitucional");
-    menu.appendChild(fcBtn);
-})();
+document.getElementById("btnQuestoes").onclick = () => {
+    home.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
+    quiz.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
+    subjectMenuQuestoes.classList.remove("hidden");
+    counter.classList.add("hidden");
+};
+document.getElementById("btnFlashcards").onclick = () => {
+    home.classList.add("hidden");
+    subjectMenuQuestoes.classList.add("hidden");
+    quiz.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
+    subjectMenuFlash.classList.remove("hidden");
+    counter.classList.add("hidden");
+};
 
 let fcDeck = null;
 let fcIndex = 0;
@@ -1818,6 +1898,8 @@ function openFlashcards(deckKey) {
     document.getElementById("fcTopic").textContent = "FLASHCARDS — " + fcDeck.name.toUpperCase();
     home.classList.add("hidden");
     subjectMenu.classList.add("hidden");
+    subjectMenuQuestoes.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
     quiz.classList.add("hidden");
     document.getElementById("flashcards").classList.remove("hidden");
     counter.classList.add("hidden");
@@ -1871,7 +1953,8 @@ function renderFlashcard() {
 
 document.getElementById("fcBackBtn").onclick = () => {
     document.getElementById("flashcards").classList.add("hidden");
-    home.classList.remove("hidden");
+    home.classList.add("hidden");
+    subjectMenuFlash.classList.remove("hidden");
     counter.classList.add("hidden");
 };
 document.getElementById("fcShuffleBtn").onclick = () => {
@@ -1904,6 +1987,9 @@ function openSubject(subject) {
     });
     home.classList.add("hidden");
     quiz.classList.add("hidden");
+    subjectMenuQuestoes.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
     subjectMenu.classList.remove("hidden");
     counter.classList.add("hidden");
 }
@@ -1932,6 +2018,14 @@ function startQuiz(content) {
 function updateCounter() {
     if (!currentContent) return;
     counter.textContent = `Respondidas ${answered}/${currentContent.questions.length} · Puladas ${skipped.length}`;
+}
+
+function escapeQuizHtml(str) {
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
 }
 
 function shuffleArray(arr) {
@@ -1998,12 +2092,14 @@ function renderQuestion() {
     if (already) {
         feedback.className = already.isCorrect ? "feedback ok" : "feedback no";
         feedback.textContent = already.isCorrect ? "✓ Você acertou!" : "✗ Você errou. A alternativa correta está marcada em verde.";
+        const explanation = document.createElement("div");
+        explanation.className = "explanation-box";
         if (item.explanation) {
-            const explanation = document.createElement("p");
-            explanation.style.cssText = "font-weight:400;margin:10px 0 0;color:#d1dfd4";
-            explanation.textContent = "Comentário: " + item.explanation;
-            feedback.appendChild(explanation);
+            explanation.innerHTML = "<strong>Explicação</strong>" + escapeQuizHtml(item.explanation);
+        } else {
+            explanation.innerHTML = "<strong>Explicação</strong>Comentário ainda não cadastrado para esta questão. Use o resumo teórico do bloco (quando disponível) e a alternativa correta marcada em verde.";
         }
+        feedback.appendChild(explanation);
         addNavButtons(nav, true);
     } else {
         const skipBtn = document.createElement("button");
@@ -2059,12 +2155,14 @@ function answerQuestion(selected) {
             correctText: correctOption.text
         });
     }
+    const explanation = document.createElement("div");
+    explanation.className = "explanation-box";
     if (item.explanation) {
-        const explanation = document.createElement("p");
-        explanation.style.cssText = "font-weight:400;margin:10px 0 0;color:#d1dfd4";
-        explanation.textContent = "Comentário: " + item.explanation;
-        feedback.appendChild(explanation);
+        explanation.innerHTML = "<strong>Explicação</strong>" + escapeQuizHtml(item.explanation);
+    } else {
+        explanation.innerHTML = "<strong>Explicação</strong>Comentário ainda não cadastrado para esta questão. Use o resumo teórico do bloco (quando disponível) e a alternativa correta marcada em verde.";
     }
+    feedback.appendChild(explanation);
 
     answerHistory[currentIndex] = {
         selected: selected,
@@ -2170,13 +2268,28 @@ function showResult() {
 function goBlockMenu() {
     quiz.classList.add("hidden");
     home.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
     subjectMenu.classList.remove("hidden");
+    counter.classList.add("hidden");
+}
+
+function goQuestoesMenu() {
+    quiz.classList.add("hidden");
+    subjectMenu.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
+    home.classList.add("hidden");
+    subjectMenuQuestoes.classList.remove("hidden");
     counter.classList.add("hidden");
 }
 
 function goHome() {
     quiz.classList.add("hidden");
     subjectMenu.classList.add("hidden");
+    subjectMenuQuestoes.classList.add("hidden");
+    subjectMenuFlash.classList.add("hidden");
+    document.getElementById("flashcards").classList.add("hidden");
     home.classList.remove("hidden");
     counter.classList.add("hidden");
 }
